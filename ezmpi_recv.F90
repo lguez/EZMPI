@@ -1,5 +1,6 @@
 module ezmpi_recv_m
 
+#ifdef HAVE_MPI
   use mpi_f08, only: mpi_recv, mpi_real, mpi_comm_world, MPI_STATUS_IGNORE, &
        mpi_logical, mpi_integer
 
@@ -82,5 +83,7 @@ contains
          MPI_STATUS_IGNORE)    
 
   end subroutine ezmpi_recv_0d_integer
+
+#endif
 
 end module ezmpi_recv_m

@@ -1,7 +1,9 @@
 module ezmpi_send_m
 
+#ifdef HAVE_MPI
   use mpi_f08, only: mpi_ssend, mpi_real, mpi_logical, mpi_comm_world, &
        mpi_integer
+#endif
 
   implicit none
 
@@ -22,7 +24,9 @@ contains
 
     !-------------------
 
+#ifdef HAVE_MPI
     call mpi_ssend(buf, 1, mpi_real, dest, tag, mpi_comm_world)
+#endif
 
   end subroutine ezmpi_send_0d_real
 
@@ -35,7 +39,9 @@ contains
 
     !-------------------
 
+#ifdef HAVE_MPI
     call mpi_ssend(buf(1), size(buf), mpi_real, dest, tag, mpi_comm_world)
+#endif
 
   end subroutine ezmpi_send_1d_real
 
@@ -48,7 +54,9 @@ contains
 
     !-------------------
 
+#ifdef HAVE_MPI
     call mpi_ssend(buf(1, 1), size(buf), mpi_real, dest, tag, mpi_comm_world)
+#endif
 
   end subroutine ezmpi_send_2d_real
 
@@ -61,7 +69,9 @@ contains
 
     !-------------------
 
+#ifdef HAVE_MPI
     call mpi_ssend(buf, 1, mpi_logical, dest, tag, mpi_comm_world)
+#endif
 
   end subroutine ezmpi_send_0d_logical
 
@@ -74,7 +84,9 @@ contains
 
     !-------------------
 
+#ifdef HAVE_MPI
     call mpi_ssend(buf, 1, mpi_integer, dest, tag, mpi_comm_world)
+#endif
 
   end subroutine ezmpi_send_0d_integer
 
