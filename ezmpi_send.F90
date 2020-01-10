@@ -9,7 +9,8 @@ module ezmpi_send_m
 
   interface ezmpi_send
      module procedure ezmpi_send_0d_real, ezmpi_send_1d_real, &
-          ezmpi_send_2d_real, ezmpi_send_0d_logical, ezmpi_send_0d_integer
+          ezmpi_send_2d_real, ezmpi_send_0d_logical, ezmpi_send_0d_integer, &
+          ezmpi_send_2d_integer
   end interface ezmpi_send
 
   private
@@ -89,5 +90,20 @@ contains
 #endif
 
   end subroutine ezmpi_send_0d_integer
+
+  !****************************************************
+
+  subroutine ezmpi_send_2d_integer(buf, dest, tag)
+
+    integer, intent(in):: buf(:, :)
+    integer, intent(in):: dest, tag
+
+    !-------------------
+
+#ifdef HAVE_MPI
+    call mpi_ssend(buf(1, 1), size(buf), mpi_integer, dest, tag, mpi_comm_world)
+#endif
+
+  end subroutine ezmpi_send_2d_integer
 
 end module ezmpi_send_m

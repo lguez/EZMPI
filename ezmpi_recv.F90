@@ -8,7 +8,8 @@ module ezmpi_recv_m
 
   interface ezmpi_recv
      module procedure ezmpi_recv_0d_real, ezmpi_recv_1d_real, &
-          ezmpi_recv_2d_real, ezmpi_recv_0d_logical, ezmpi_recv_0d_integer
+          ezmpi_recv_2d_real, ezmpi_recv_0d_logical, ezmpi_recv_0d_integer, &
+          ezmpi_recv_2d_integer
   end interface ezmpi_recv
 
   private
@@ -83,6 +84,20 @@ contains
          MPI_STATUS_IGNORE)    
 
   end subroutine ezmpi_recv_0d_integer
+
+  !****************************************************
+
+  subroutine ezmpi_recv_2d_integer(buf, source, tag)
+
+    integer, intent(out):: buf(:, :)
+    integer, intent(in):: source, tag
+
+    !-------------------------------------------------------
+
+    call mpi_recv(buf(1, 1), size(buf), mpi_integer, source, tag, &
+         mpi_comm_world, MPI_STATUS_IGNORE)    
+
+  end subroutine ezmpi_recv_2d_integer
 
 #endif
 
