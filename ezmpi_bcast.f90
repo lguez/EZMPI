@@ -3,7 +3,8 @@ module ezmpi_bcast_m
   implicit none
 
   interface ezmpi_bcast
-     module procedure ezmpi_bcast_1d_real, ezmpi_bcast_0d_integer
+     module procedure ezmpi_bcast_1d_real, ezmpi_bcast_0d_integer, &
+          ezmpi_bcast_1d_integer
   end interface ezmpi_bcast
 
   private
@@ -15,7 +16,7 @@ contains
 
     use mpi_f08, only: mpi_bcast, mpi_real, mpi_comm_world
 
-    real, intent(in):: buffer(:)
+    real, intent(inout):: buffer(:)
     integer, intent(in):: root
 
     !---------------------------------------------------------------------
@@ -30,7 +31,7 @@ contains
 
     use mpi_f08, only: mpi_bcast, mpi_integer, mpi_comm_world
 
-    integer, intent(in):: buffer
+    integer, intent(inout):: buffer
     integer, intent(in):: root
 
     !---------------------------------------------------------------------
@@ -38,5 +39,20 @@ contains
     call mpi_bcast(buffer, 1, mpi_integer, root, mpi_comm_world)
 
   end subroutine ezmpi_bcast_0d_integer
+
+  !****************************************************
+
+  subroutine ezmpi_bcast_1d_integer(buffer, root)
+
+    use mpi_f08, only: mpi_bcast, mpi_integer, mpi_comm_world
+
+    integer, intent(inout):: buffer(:)
+    integer, intent(in):: root
+
+    !---------------------------------------------------------------------
+
+    call mpi_bcast(buffer, size(buffer), mpi_integer, root, mpi_comm_world)
+
+  end subroutine ezmpi_bcast_1d_integer
 
 end module ezmpi_bcast_m
