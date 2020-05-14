@@ -1,7 +1,11 @@
 module ezmpi_bcast_m
 
+#ifdef HAVE_MPI
+  use mpi_f08, only: mpi_bcast, mpi_real, mpi_integer, mpi_comm_world
+#endif
+  
   implicit none
-
+    
   interface ezmpi_bcast
      module procedure ezmpi_bcast_1d_real, ezmpi_bcast_0d_integer, &
           ezmpi_bcast_1d_integer
@@ -14,14 +18,14 @@ contains
 
   subroutine ezmpi_bcast_1d_real(buffer, root)
 
-    use mpi_f08, only: mpi_bcast, mpi_real, mpi_comm_world
-
     real, intent(inout):: buffer(:)
     integer, intent(in):: root
 
     !---------------------------------------------------------------------
 
+#ifdef HAVE_MPI
     call mpi_bcast(buffer, size(buffer), mpi_real, root, mpi_comm_world)
+#endif
 
   end subroutine ezmpi_bcast_1d_real
 
@@ -29,14 +33,14 @@ contains
 
   subroutine ezmpi_bcast_0d_integer(buffer, root)
 
-    use mpi_f08, only: mpi_bcast, mpi_integer, mpi_comm_world
-
     integer, intent(inout):: buffer
     integer, intent(in):: root
 
     !---------------------------------------------------------------------
 
+#ifdef HAVE_MPI
     call mpi_bcast(buffer, 1, mpi_integer, root, mpi_comm_world)
+#endif
 
   end subroutine ezmpi_bcast_0d_integer
 
@@ -44,14 +48,14 @@ contains
 
   subroutine ezmpi_bcast_1d_integer(buffer, root)
 
-    use mpi_f08, only: mpi_bcast, mpi_integer, mpi_comm_world
-
     integer, intent(inout):: buffer(:)
     integer, intent(in):: root
 
     !---------------------------------------------------------------------
 
+#ifdef HAVE_MPI
     call mpi_bcast(buffer, size(buffer), mpi_integer, root, mpi_comm_world)
+#endif
 
   end subroutine ezmpi_bcast_1d_integer
 
