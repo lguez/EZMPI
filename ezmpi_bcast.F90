@@ -1,14 +1,15 @@
 module ezmpi_bcast_m
 
 #ifdef HAVE_MPI
-  use mpi_f08, only: mpi_bcast, mpi_real, mpi_integer, mpi_comm_world
+  use mpi_f08, only: mpi_bcast, mpi_real, mpi_integer, mpi_comm_world, &
+       mpi_logical
 #endif
   
   implicit none
     
   interface ezmpi_bcast
      module procedure ezmpi_bcast_1d_real, ezmpi_bcast_0d_integer, &
-          ezmpi_bcast_1d_integer
+          ezmpi_bcast_1d_integer, ezmpi_bcast_0d_logical
   end interface ezmpi_bcast
 
   private
@@ -58,5 +59,20 @@ contains
 #endif
 
   end subroutine ezmpi_bcast_1d_integer
+
+  !****************************************************
+
+  subroutine ezmpi_bcast_0d_logical(buffer, root)
+
+    logical, intent(inout):: buffer
+    integer, intent(in):: root
+
+    !---------------------------------------------------------------------
+
+#ifdef HAVE_MPI
+    call mpi_bcast(buffer, 1, mpi_logical, root, mpi_comm_world)
+#endif
+
+  end subroutine ezmpi_bcast_0d_logical
 
 end module ezmpi_bcast_m
