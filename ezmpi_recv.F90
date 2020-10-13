@@ -25,7 +25,7 @@ contains
     !-------------------------------------------------------
 
     call mpi_recv(buf, 1, mpi_real, source, tag, mpi_comm_world, &
-         MPI_STATUS_IGNORE)    
+         MPI_STATUS_IGNORE)
 
   end subroutine ezmpi_recv_0d_real
 
@@ -67,7 +67,7 @@ contains
     !-------------------------------------------------------
 
     call mpi_recv(buf, 1, mpi_logical, source, tag, mpi_comm_world, &
-         MPI_STATUS_IGNORE)    
+         MPI_STATUS_IGNORE)
 
   end subroutine ezmpi_recv_0d_logical
 
@@ -81,7 +81,7 @@ contains
     !-------------------------------------------------------
 
     call mpi_recv(buf, 1, mpi_integer, source, tag, mpi_comm_world, &
-         MPI_STATUS_IGNORE)    
+         MPI_STATUS_IGNORE)
 
   end subroutine ezmpi_recv_0d_integer
 
