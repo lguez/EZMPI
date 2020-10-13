@@ -41,7 +41,8 @@ contains
     !-------------------
 
 #ifdef HAVE_MPI
-    call mpi_ssend(buf(1), size(buf), mpi_real, dest, tag, mpi_comm_world)
+    if (size(buf) /= 0) call mpi_ssend(buf(1), size(buf), mpi_real, dest, tag, &
+         mpi_comm_world)
 #endif
 
   end subroutine ezmpi_send_1d_real
@@ -56,7 +57,8 @@ contains
     !-------------------
 
 #ifdef HAVE_MPI
-    call mpi_ssend(buf(1, 1), size(buf), mpi_real, dest, tag, mpi_comm_world)
+    if (size(buf) /= 0) call mpi_ssend(buf(1, 1), size(buf), mpi_real, dest, &
+         tag, mpi_comm_world)
 #endif
 
   end subroutine ezmpi_send_2d_real
@@ -101,7 +103,8 @@ contains
     !-------------------
 
 #ifdef HAVE_MPI
-    call mpi_ssend(buf(1, 1), size(buf), mpi_integer, dest, tag, mpi_comm_world)
+    if (size(buf) /= 0) call mpi_ssend(buf(1, 1), size(buf), mpi_integer, &
+         dest, tag, mpi_comm_world)
 #endif
 
   end subroutine ezmpi_send_2d_integer

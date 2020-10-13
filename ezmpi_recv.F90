@@ -38,8 +38,8 @@ contains
 
     !-------------------------------------------------------
 
-    call mpi_recv(buf(1), size(buf), mpi_real, source, tag, mpi_comm_world, &
-         MPI_STATUS_IGNORE)    
+    if (size(buf) /= 0) call mpi_recv(buf(1), size(buf), mpi_real, source, &
+         tag, mpi_comm_world, MPI_STATUS_IGNORE)
 
   end subroutine ezmpi_recv_1d_real
 
@@ -52,8 +52,8 @@ contains
 
     !-------------------------------------------------------
 
-    call mpi_recv(buf(1, 1), size(buf), mpi_real, source, tag, mpi_comm_world, &
-         MPI_STATUS_IGNORE)    
+    if (size(buf) /= 0) call mpi_recv(buf(1, 1), size(buf), mpi_real, source, &
+         tag, mpi_comm_world, MPI_STATUS_IGNORE)
 
   end subroutine ezmpi_recv_2d_real
 
@@ -94,8 +94,8 @@ contains
 
     !-------------------------------------------------------
 
-    call mpi_recv(buf(1, 1), size(buf), mpi_integer, source, tag, &
-         mpi_comm_world, MPI_STATUS_IGNORE)    
+    if (size(buf) /= 0) call mpi_recv(buf(1, 1), size(buf), mpi_integer, &
+         source, tag, mpi_comm_world, MPI_STATUS_IGNORE)
 
   end subroutine ezmpi_recv_2d_integer
 
