@@ -14,6 +14,11 @@ option(EZMPI_USE_MPI "Use within MPI program" ON)
 
 if(EZMPI_USE_MPI)
   find_package(MPI REQUIRED)
+  
+  if(NOT MPI_Fortran_HAVE_F08_MODULE)
+    message(FATAL_ERROR "mpi_f08 is not available.")
+  endif()
+
   target_link_libraries(ezmpi PUBLIC MPI::MPI_Fortran)
   target_compile_definitions(ezmpi PRIVATE HAVE_MPI)
 endif()
