@@ -19,7 +19,7 @@ if(EZMPI_USE_MPI)
     message(FATAL_ERROR "mpi_f08 is not available.")
   endif()
 
-  target_link_libraries(ezmpi PUBLIC MPI::MPI_Fortran)
+  target_link_libraries(ezmpi PRIVATE MPI::MPI_Fortran)
   target_compile_definitions(ezmpi PRIVATE HAVE_MPI)
 endif()
 
