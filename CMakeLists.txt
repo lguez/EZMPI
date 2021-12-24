@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.14)
+list(APPEND CMAKE_MESSAGE_CONTEXT EZMPI)
 project(EZMPI Fortran)
 
 add_library(ezmpi ezmpi.f90 ezmpi_recv.F90 ezmpi_send.F90 abort.F90
