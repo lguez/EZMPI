@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 list(APPEND CMAKE_MESSAGE_CONTEXT EZMPI)
-project(EZMPI Fortran)
+project(EZMPI LANGUAGES Fortran)
 
 add_library(ezmpi ezmpi.f90 ezmpi_recv.f90 ezmpi_send.f90
   ezmpi_bcast.f90)
@@ -26,8 +26,10 @@ configure_package_config_file(Config.cmake.in
 
 if(CMAKE_Fortran_COMPILER_ID MATCHES NAG|Intel)
   set(install_include_dir include/${PROJECT_NAME})
+
   install(DIRECTORY ${PROJECT_BINARY_DIR}/modules/ DESTINATION
     ${install_include_dir})
+
 else()
   set(install_include_dir include)
   install(FILES ${PROJECT_BINARY_DIR}/modules/ezmpi.mod TYPE INCLUDE)
