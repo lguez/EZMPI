@@ -11,18 +11,13 @@ set_target_properties(ezmpi PROPERTIES Fortran_MODULE_DIRECTORY
 target_include_directories(ezmpi PUBLIC
   $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/modules>)
 
-option(EZMPI_USE_MPI "Use within MPI program" ON)
-
-if(EZMPI_USE_MPI)
-  find_package(MPI REQUIRED)
+find_package(MPI REQUIRED)
   
-  if(NOT MPI_Fortran_HAVE_F08_MODULE)
-    message(FATAL_ERROR "mpi_f08 is not available.")
-  endif()
-
-  target_link_libraries(ezmpi PRIVATE MPI::MPI_Fortran)
-  target_compile_definitions(ezmpi PUBLIC HAVE_MPI)
+if(NOT MPI_Fortran_HAVE_F08_MODULE)
+  message(FATAL_ERROR "mpi_f08 is not available.")
 endif()
+
+target_link_libraries(ezmpi PRIVATE MPI::MPI_Fortran)
 
 include(CMakePackageConfigHelpers)
 configure_package_config_file(Config.cmake.in

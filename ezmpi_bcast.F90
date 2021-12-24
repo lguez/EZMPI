@@ -1,9 +1,7 @@
 module ezmpi_bcast_m
 
-#ifdef HAVE_MPI
   use mpi_f08, only: mpi_bcast, mpi_real, mpi_integer, mpi_comm_world, &
        mpi_logical
-#endif
   
   implicit none
     
@@ -24,9 +22,7 @@ contains
 
     !---------------------------------------------------------------------
 
-#ifdef HAVE_MPI
     call mpi_bcast(buffer, size(buffer), mpi_real, root, mpi_comm_world)
-#endif
 
   end subroutine ezmpi_bcast_1d_real
 
@@ -39,9 +35,7 @@ contains
 
     !---------------------------------------------------------------------
 
-#ifdef HAVE_MPI
     call mpi_bcast(buffer, 1, mpi_integer, root, mpi_comm_world)
-#endif
 
   end subroutine ezmpi_bcast_0d_integer
 
@@ -54,9 +48,7 @@ contains
 
     !---------------------------------------------------------------------
 
-#ifdef HAVE_MPI
     call mpi_bcast(buffer, size(buffer), mpi_integer, root, mpi_comm_world)
-#endif
 
   end subroutine ezmpi_bcast_1d_integer
 
@@ -69,9 +61,7 @@ contains
 
     !---------------------------------------------------------------------
 
-#ifdef HAVE_MPI
     call mpi_bcast(buffer, 1, mpi_logical, root, mpi_comm_world)
-#endif
 
   end subroutine ezmpi_bcast_0d_logical
 
