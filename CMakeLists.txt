@@ -21,7 +21,7 @@ if(EZMPI_USE_MPI)
   endif()
 
   target_link_libraries(ezmpi PRIVATE MPI::MPI_Fortran)
-  target_compile_definitions(ezmpi PRIVATE HAVE_MPI)
+  target_compile_definitions(ezmpi PUBLIC HAVE_MPI)
 endif()
 
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR})
