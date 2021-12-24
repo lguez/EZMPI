@@ -18,6 +18,7 @@ if(NOT MPI_Fortran_HAVE_F08_MODULE)
 endif()
 
 target_link_libraries(ezmpi PRIVATE MPI::MPI_Fortran)
+add_library(${PROJECT_NAME}::ezmpi_util ALIAS ezmpi)
 
 include(CMakePackageConfigHelpers)
 configure_package_config_file(Config.cmake.in
@@ -39,5 +40,8 @@ install(TARGETS ezmpi EXPORT ${PROJECT_NAME}Targets LIBRARY
   INCLUDES DESTINATION ${install_include_dir})
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
   DESTINATION lib/cmake/${PROJECT_NAME})
-install(EXPORT ${PROJECT_NAME}Targets DESTINATION lib/cmake/${PROJECT_NAME})
-export(EXPORT ${PROJECT_NAME}Targets)
+
+install(EXPORT ${PROJECT_NAME}Targets DESTINATION
+  lib/cmake/${PROJECT_NAME} NAMESPACE ${PROJECT_NAME}::)
+
+export(EXPORT ${PROJECT_NAME}Targets NAMESPACE ${PROJECT_NAME}::)
