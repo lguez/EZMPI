@@ -20,7 +20,7 @@ endif()
 target_link_libraries(ezmpi PRIVATE MPI::MPI_Fortran)
 add_library(${PROJECT_NAME}::ezmpi_util ALIAS ezmpi)
 
-if(CMAKE_Fortran_COMPILER_ID MATCHES NAG|Intel)
+if(CMAKE_Fortran_COMPILER_ID MATCHES NAG|Intel|PGI)
   set(install_include_dir include/${PROJECT_NAME})
 
   install(DIRECTORY ${PROJECT_BINARY_DIR}/modules/ DESTINATION
