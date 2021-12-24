@@ -24,9 +24,6 @@ if(EZMPI_USE_MPI)
   target_compile_definitions(ezmpi PUBLIC HAVE_MPI)
 endif()
 
-set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR})
-include(ConfigureCompilerFlags)
-
 include(CMakePackageConfigHelpers)
 configure_package_config_file(Config.cmake.in
     ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
