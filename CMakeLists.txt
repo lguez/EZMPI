@@ -20,6 +20,8 @@ endif()
 target_link_libraries(ezmpi PRIVATE MPI::MPI_Fortran)
 add_library(${PROJECT_NAME}::ezmpi_util ALIAS ezmpi)
 
+# Start installation part
+
 if(CMAKE_Fortran_COMPILER_ID MATCHES NAG|Intel|PGI)
   set(install_include_dir include/${PROJECT_NAME})
 
@@ -37,6 +39,8 @@ install(TARGETS ezmpi EXPORT ${PROJECT_NAME}Targets INCLUDES
 install(EXPORT ${PROJECT_NAME}Targets DESTINATION
   lib/cmake/${PROJECT_NAME} NAMESPACE ${PROJECT_NAME}:: FILE
   ${PROJECT_NAME}Config.cmake)
+
+# End installation part
 
 export(EXPORT ${PROJECT_NAME}Targets NAMESPACE ${PROJECT_NAME}:: FILE
   ${PROJECT_NAME}Config.cmake)
