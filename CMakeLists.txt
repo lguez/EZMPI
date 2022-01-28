@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 list(APPEND CMAKE_MESSAGE_CONTEXT EZMPI)
 project(EZMPI LANGUAGES Fortran)
 
-add_library(ezmpi ezmpi.f90 ezmpi_recv.f90 ezmpi_send.f90
+add_library(ezmpi ezmpi.f90 ezmpi_recv.f90 ezmpi_ssend.f90
   ezmpi_bcast.f90)
 
 set_target_properties(ezmpi PROPERTIES Fortran_MODULE_DIRECTORY
