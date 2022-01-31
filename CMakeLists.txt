@@ -1,18 +1,18 @@
 cmake_minimum_required(VERSION 3.16)
 list(APPEND CMAKE_MESSAGE_CONTEXT EZMPI)
 project(EZMPI LANGUAGES Fortran)
-add_library(ezmpi ezmpi.f90 ezmpi_recv.f90 ezmpi_ssend.f90
-  ezmpi_send.f90 ezmpi_bcast.f90)
-set_target_properties(ezmpi PROPERTIES Fortran_MODULE_DIRECTORY
-  ${PROJECT_BINARY_DIR}/modules)
-target_include_directories(ezmpi PUBLIC
-  $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/modules>)
 find_package(MPI REQUIRED)
   
 if(NOT MPI_Fortran_HAVE_F08_MODULE)
   message(FATAL_ERROR "mpi_f08 is not available.")
 endif()
 
+add_library(ezmpi ezmpi.f90 ezmpi_recv.f90 ezmpi_ssend.f90
+  ezmpi_send.f90 ezmpi_bcast.f90)
+set_target_properties(ezmpi PROPERTIES Fortran_MODULE_DIRECTORY
+  ${PROJECT_BINARY_DIR}/modules)
+target_include_directories(ezmpi PUBLIC
+  $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/modules>)
 target_link_libraries(ezmpi PRIVATE MPI::MPI_Fortran)
 add_library(${PROJECT_NAME}::ezmpi_util ALIAS ezmpi)
 
