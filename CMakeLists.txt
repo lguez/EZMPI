@@ -15,6 +15,7 @@ target_include_directories(ezmpi PUBLIC
   $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/modules>)
 target_link_libraries(ezmpi PRIVATE MPI::MPI_Fortran)
 add_library(${PROJECT_NAME}::ezmpi_util ALIAS ezmpi)
+configure_file(${PROJECT_NAME}Config.cmake.in ${PROJECT_NAME}Config.cmake @ONLY)
 
 # Start installation part
 
@@ -29,11 +30,11 @@ endif()
 
 install(TARGETS ezmpi EXPORT ${PROJECT_NAME}Targets INCLUDES
   DESTINATION ${install_include_dir})
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
+  DESTINATION lib/cmake/${PROJECT_NAME})
 install(EXPORT ${PROJECT_NAME}Targets DESTINATION
-  lib/cmake/${PROJECT_NAME} NAMESPACE ${PROJECT_NAME}:: FILE
-  ${PROJECT_NAME}Config.cmake)
+  lib/cmake/${PROJECT_NAME} NAMESPACE ${PROJECT_NAME}::)
 
 # End installation part
 
-export(EXPORT ${PROJECT_NAME}Targets NAMESPACE ${PROJECT_NAME}:: FILE
-  ${PROJECT_NAME}Config.cmake)
+export(EXPORT ${PROJECT_NAME}Targets NAMESPACE ${PROJECT_NAME}::)
