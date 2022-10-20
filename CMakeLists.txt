@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 list(APPEND CMAKE_MESSAGE_CONTEXT EZMPI)
 project(EZMPI LANGUAGES Fortran)
-find_package(MPI REQUIRED)
+find_package(MPI REQUIRED COMPONENTS Fortran)
   
 if(NOT MPI_Fortran_HAVE_F08_MODULE)
   message(FATAL_ERROR "mpi_f08 is not available.")
