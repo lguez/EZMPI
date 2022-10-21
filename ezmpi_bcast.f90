@@ -6,14 +6,27 @@ module ezmpi_bcast_m
   implicit none
     
   interface ezmpi_bcast
-     module procedure ezmpi_bcast_1d_real, ezmpi_bcast_0d_integer, &
-          ezmpi_bcast_1d_integer, ezmpi_bcast_0d_logical
+     module procedure ezmpi_bcast_0d_real, ezmpi_bcast_1d_real, &
+          ezmpi_bcast_0d_integer, ezmpi_bcast_1d_integer, ezmpi_bcast_0d_logical
   end interface ezmpi_bcast
 
   private
   public ezmpi_bcast
 
 contains
+
+  subroutine ezmpi_bcast_0d_real(buffer, root)
+
+    real, intent(inout):: buffer
+    integer, intent(in):: root
+
+    !---------------------------------------------------------------------
+
+    call mpi_bcast(buffer, 1, mpi_real, root, mpi_comm_world)
+
+  end subroutine ezmpi_bcast_0d_real
+
+  !****************************************************
 
   subroutine ezmpi_bcast_1d_real(buffer, root)
 
