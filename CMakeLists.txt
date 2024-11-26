@@ -14,7 +14,7 @@ set_target_properties(ezmpi PROPERTIES Fortran_MODULE_DIRECTORY
 target_include_directories(ezmpi PUBLIC
   $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/modules>)
 target_link_libraries(ezmpi PRIVATE MPI::MPI_Fortran)
-add_library(${PROJECT_NAME}::ezmpi_util ALIAS ezmpi)
+add_library(${PROJECT_NAME}::ezmpi ALIAS ezmpi)
 configure_file(${PROJECT_NAME}Config.cmake.in ${PROJECT_NAME}Config.cmake @ONLY)
 
 # Start installation part
